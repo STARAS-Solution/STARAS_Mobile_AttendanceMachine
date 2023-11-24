@@ -73,7 +73,7 @@ class _StoreInfoResponsePageState extends State<StoreInfoResponsePage> {
                     GestureDetector(
                       onTap: () {
                         // Navigate to EmployeeInStorePage
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                             builder: (context) => EmployeeInStorePage(

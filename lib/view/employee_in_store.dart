@@ -64,11 +64,14 @@ class _EmployeeInStorePageState extends State<EmployeeInStorePage> {
         elevation: 0.0,
         titleSpacing: 0.0,
         iconTheme: const IconThemeData(color: Colors.white),
-        title: Text(
-          'Employee',
-          maxLines: 2,
-          style: kTextStyle.copyWith(
-              color: Colors.white, fontWeight: FontWeight.bold),
+        title: Padding(
+          padding: EdgeInsets.all(40),
+          child: Text(
+            'Employee',
+            maxLines: 2,
+            style: kTextStyle.copyWith(
+                color: Colors.white, fontWeight: FontWeight.bold),
+          ),
         ),
       ),
       body: SingleChildScrollView(

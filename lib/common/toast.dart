@@ -37,14 +37,13 @@ void onLoading(context) {
     barrierDismissible: false,
     builder: (BuildContext context) {
       return Column(
-        // crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Center(child: CircularProgressIndicator()),
           Container(
             child: const Center(
                 child: Text(
-              "Đang xử lý.Vui lòng đợi chút!",
+              "Processing. Please wait...",
               style: TextStyle(color: Colors.white, fontSize: 16),
             )),
             margin: const EdgeInsets.only(top: 10),

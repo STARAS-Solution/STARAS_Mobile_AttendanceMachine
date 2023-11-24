@@ -35,6 +35,7 @@ class _CameraViewState extends State<CameraView> {
   File? _capturedImage;
   final FirebaseStorage _storage = FirebaseStorage.instance;
   final deviceInfoPlugin = DeviceInfoPlugin();
+  bool showCaptureAgainButton = false;
 
   String deviceId = "Not Found";
 
@@ -60,6 +61,7 @@ class _CameraViewState extends State<CameraView> {
   }
 
   Future<void> checkIn() async {
+    onLoading(context);
     var apiUrl = 'http://159.223.36.82:2500/check-in';
 
     // Request body
@@ -79,6 +81,7 @@ class _CameraViewState extends State<CameraView> {
         body: json.encode(requestBody),
       );
 
+      Navigator.pop(context);
       if (response.statusCode == 201) {
         print('Data response : ${response.body}');
 
@@ -89,17 +92,25 @@ class _CameraViewState extends State<CameraView> {
           icon: const Icon(Icons.done),
         );
 
-        Navigator.pushReplacement(
+        Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
             builder: (context) => EmployeeInStorePage(
               storeInfoResponse: widget.storeInfoResponse,
             ),
           ),
+          (route) => false, // This prevents going back to the CheckInPage
         );
+
+        setState(() {
+          showCaptureAgainButton = false;
+        });
 
         print('Check In  Successful');
       } else if (response.statusCode >= 400 && response.statusCode <= 500) {
+        setState(() {
+          showCaptureAgainButton = true;
+        });
         print('Error: ${response.statusCode} - ${response.body}');
 
         showToast(
@@ -118,6 +129,7 @@ class _CameraViewState extends State<CameraView> {
   }
 
   Future<void> checkOut() async {
+    onLoading(context);
     var apiUrl = 'http://159.223.36.82:2500/check-out';
 
     // Request body
@@ -137,8 +149,13 @@ class _CameraViewState extends State<CameraView> {
         body: json.encode(requestBody),
       );
 
+      Navigator.pop(context);
       if (response.statusCode == 200) {
         print('Data response : ${response.body}');
+
+        setState(() {
+          showCaptureAgainButton = false;
+        });
 
         showToast(
           context: context,
@@ -147,17 +164,22 @@ class _CameraViewState extends State<CameraView> {
           icon: const Icon(Icons.done),
         );
 
-        Navigator.pushReplacement(
+        Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
             builder: (context) => EmployeeInStorePage(
               storeInfoResponse: widget.storeInfoResponse,
             ),
           ),
+          (route) => false,
         );
 
         print('Check Out Success');
       } else if (response.statusCode >= 400 && response.statusCode <= 500) {
+        setState(() {
+          showCaptureAgainButton = true;
+        });
+
         print('Error: ${response.statusCode} - ${response.body}');
 
         showToast(
@@ -194,14 +216,16 @@ class _CameraViewState extends State<CameraView> {
                   width: double.maxFinite,
                   fit: BoxFit.fitWidth,
                 ),
-                // ElevatedButton(
-                //   onPressed: () => setState(() => _capturedImage = null),
-                //   child: const Text(
-                //     'Capture Again',
-                //     textAlign: TextAlign.center,
-                //     style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
-                //   ),
-                // ),
+                if (showCaptureAgainButton)
+                  ElevatedButton(
+                    onPressed: () => setState(() => _capturedImage = null),
+                    child: const Text(
+                      'Capture Again',
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+                    ),
+                  ),
               ],
             ),
           );

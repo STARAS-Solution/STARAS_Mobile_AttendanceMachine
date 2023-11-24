@@ -108,7 +108,10 @@ class _DeviceInformationState extends State<DeviceInformation> {
               item('Device Name', info.name),
               item('System Name', info.systemName),
               item('System Version', info.systemVersion),
-              item('Device Is Physical', info.isPhysicalDevice.toString()),
+              item(
+                'Device Is Physical',
+                info.isPhysicalDevice.toString(),
+              ),
             ],
           );
         } else {
