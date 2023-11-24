@@ -13,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:staras_checkin/common/toast.dart';
-
 import 'package:staras_checkin/components/button_global.dart';
 import 'package:staras_checkin/constants/constant.dart';
 import 'package:staras_checkin/controllers/location_controller.dart';
@@ -41,7 +40,6 @@ class _VerifyMachinePageState extends State<VerifyMachinePage> {
   void initState() {
     super.initState();
     _initControllers();
-    _getDeviceInfo();
     _getDeviceInfo();
   }
 
@@ -115,13 +113,13 @@ class _VerifyMachinePageState extends State<VerifyMachinePage> {
 
         showToast(
           context: context,
-          msg: "Machine verification Successful",
+          msg: "Machine Verification Successful",
           color: Color.fromARGB(255, 128, 249, 16),
           icon: const Icon(Icons.done),
         );
 
         print('Machine verification successful');
-      } else if (response.statusCode == 400) {
+      } else if (response.statusCode >= 400 || response.statusCode <= 500) {
         print('Error: ${response.statusCode} - ${response.body}');
 
         final Map<String, dynamic> errorResponse = json.decode(response.body);

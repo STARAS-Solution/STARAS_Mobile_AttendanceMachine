@@ -49,6 +49,11 @@ dependencies:
   geolocator: ^10.1.0
   fluttertoast: ^8.2.4
   intl: ^0.18.1
+  provider: ^6.1.1
+  unique_identifier: ^0.3.0
+  one_clock: ^1.0.9
+  firebase_core: ^2.23.0
+  firebase_storage: ^11.5.2
 
 dev_dependencies:
   flutter_test:

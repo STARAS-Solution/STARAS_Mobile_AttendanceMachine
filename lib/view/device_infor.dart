@@ -1,13 +1,45 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/material.dart';
+
+import 'package:flutter/services.dart';
 import 'package:staras_checkin/constants/constant.dart';
+import 'package:unique_identifier/unique_identifier.dart';
 
-class DeviceInformation extends StatelessWidget {
-  DeviceInformation({super.key});
+class DeviceInformation extends StatefulWidget {
+  const DeviceInformation({super.key});
 
+  @override
+  State<DeviceInformation> createState() => _DeviceInformationState();
+}
+
+class _DeviceInformationState extends State<DeviceInformation> {
   final deviceInfoPlugin = DeviceInfoPlugin();
+
+  String _identifier = 'Unknown';
+
+  @override
+  void initState() {
+    super.initState();
+    initUniqueIdentifierState();
+  }
+
+  Future<void> initUniqueIdentifierState() async {
+    String identifier;
+    try {
+      identifier = (await UniqueIdentifier.serial)!;
+    } on PlatformException {
+      identifier = 'Failed to get Unique Identifier';
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      _identifier = identifier;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +77,9 @@ class DeviceInformation extends StatelessWidget {
           AndroidDeviceInfo info = snapshot.data!;
           return Column(
             children: [
-              // item('Android ID', info.id),
-              item('IMEI', info.id),
+              Text('Identifier IMEI: $_identifier',
+                  style: kTextStyle.copyWith(fontSize: 16)),
+              item('Android', info.id),
               item('Android Model', info.model),
               item('Android Brand', info.brand),
               item('Android Device', info.device),
@@ -89,24 +122,22 @@ class DeviceInformation extends StatelessWidget {
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.symmetric(vertical: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            name,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              name,
+              style: kTextStyle.copyWith(
+                  fontSize: 16, fontWeight: FontWeight.bold),
             ),
-          ),
-          const SizedBox(height: 5),
-          Text(
-            value,
-            style: const TextStyle(
-              fontSize: 18,
+            const SizedBox(height: 5),
+            Text(
+              value,
+              style: kTextStyle.copyWith(fontSize: 16),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

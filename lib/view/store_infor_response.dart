@@ -76,7 +76,9 @@ class _StoreInfoResponsePageState extends State<StoreInfoResponsePage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => EmployeeInStorePage(),
+                            builder: (context) => EmployeeInStorePage(
+                              storeInfoResponse: widget.storeInfoResponse,
+                            ),
                           ),
                         );
                       },

@@ -5,15 +5,19 @@ import 'package:staras_checkin/controllers/location_controller.dart';
 import 'dependency_injection.dart';
 import 'package:face_camera/face_camera.dart';
 import 'package:staras_checkin/view/splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); //Add this
   DependencyInjection.init();
   await FaceCamera.initialize(); //Add this
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   LocationController locationController = LocationController();
 
-  // Get the current location when the app starts
   try {
     await locationController.getCurrentLocation();
   } catch (e) {
