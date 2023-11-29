@@ -78,9 +78,6 @@ class _EmployeeInStorePageState extends State<EmployeeInStorePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 20.0,
-            ),
             Container(
               width: context.width(),
               height: 1000,
@@ -96,9 +93,8 @@ class _EmployeeInStorePageState extends State<EmployeeInStorePage> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     const SizedBox(
-                      height: 20.0,
+                      height: 20,
                     ),
-                    const SizedBox(height: 40.0),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
@@ -212,16 +208,13 @@ class _EmployeeInStorePageState extends State<EmployeeInStorePage> {
           print("ResponseBody: ${response.body}");
           TimeDecisionModel timeDecision = TimeDecisionModel.fromJson(jsonMap);
 
-          // print(
-          //     'EmployeeShiftHistoryId: ${timeDecision.employeeShiftHistoryId}');
-          // print(': ${timeDecision.message}');
-          // print('StatuMessages: ${timeDecision.status}');
           print(response.statusCode);
 
           String employeeCode = employee.employeeCode ?? "";
           String employeeName = employee.employeeName ?? "";
 
           if (timeDecision.status == 1) {
+            // Handle status 1
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -231,10 +224,12 @@ class _EmployeeInStorePageState extends State<EmployeeInStorePage> {
                   employeeCode: employeeCode,
                   employeeShiftHistoryId: timeDecision.employeeShiftHistoryId!,
                   isCheckIn: true,
+                  timeDecision: timeDecision,
                 ),
               ),
             );
           } else if (timeDecision.status == 0) {
+            // Handle status 0
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -244,6 +239,7 @@ class _EmployeeInStorePageState extends State<EmployeeInStorePage> {
                   employeeCode: employeeCode,
                   employeeShiftHistoryId: timeDecision.employeeShiftHistoryId!,
                   isCheckIn: false,
+                  timeDecision: timeDecision,
                 ),
               ),
             );
@@ -264,13 +260,17 @@ class _EmployeeInStorePageState extends State<EmployeeInStorePage> {
             icon: const Icon(Icons.error),
           );
         }
-      } else if (response.statusCode >= 400 || response.statusCode <= 500) {
+      } else if (response.statusCode >= 400 && response.statusCode <= 500) {
+        // Handle status code 400-500
         print(
             'Failed to fetch time decision. Status code: ${response.statusCode} - ${response.body}');
 
+        final Map<String, dynamic> jsonMap = json.decode(response.body);
+        TimeDecisionModel errorModel = TimeDecisionModel.fromJson(jsonMap);
+
         showToast(
           context: context,
-          msg: response.body,
+          msg: errorModel.message ?? "Unknown error occurred",
           color: Colors.red,
           icon: const Icon(Icons.error),
         );

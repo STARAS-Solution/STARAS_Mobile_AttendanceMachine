@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:staras_checkin/constants/constant.dart';
 import 'package:staras_checkin/models/store.info.response.model.dart';
+import 'package:staras_checkin/models/time.decision.model.dart';
 import 'package:staras_checkin/view/camera.dart';
 import 'package:one_clock/one_clock.dart';
 
@@ -14,14 +15,16 @@ class CheckInPage extends StatefulWidget {
   final int? employeeShiftHistoryId;
   final String? employeeName;
   final StoreInfoResponseModel? storeInfoResponse;
-  const CheckInPage(
-      {Key? key,
-      required this.isCheckIn,
-      this.employeeCode,
-      this.employeeShiftHistoryId,
-      this.employeeName,
-      this.storeInfoResponse})
-      : super(key: key);
+  final TimeDecisionModel? timeDecision;
+  const CheckInPage({
+    Key? key,
+    required this.isCheckIn,
+    this.employeeCode,
+    this.employeeShiftHistoryId,
+    this.employeeName,
+    this.storeInfoResponse,
+    this.timeDecision,
+  }) : super(key: key);
 
   @override
   _CheckInPageState createState() => _CheckInPageState();
@@ -296,10 +299,11 @@ class _CheckInPageState extends State<CheckInPage> {
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Icon(Icons.access_alarm_outlined),
+                                Icon(Icons.access_alarm_outlined),
                                 Icon(Icons.access_time),
-                                Icon(Icons.access_time_filled_outlined),
                               ],
                             ),
                             SizedBox(
@@ -307,7 +311,8 @@ class _CheckInPageState extends State<CheckInPage> {
                             ),
                             // Hàng 1: Chứa ba trường "Check In", "Check Out", "Total Time"
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 // Trường "Check In"
                                 Column(
@@ -347,15 +352,18 @@ class _CheckInPageState extends State<CheckInPage> {
                             SizedBox(height: 20),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 // Giá trị cho trường "Check In"
                                 Column(
                                   children: [
                                     Text(
-                                      '07:00',
-                                      style: kTextStyle.copyWith(
-                                        fontSize: 12.0,
-                                      ),
+                                      widget.timeDecision?.checkIn != null
+                                          ? DateFormat('hh:mm a').format(
+                                              widget.timeDecision!.checkIn!)
+                                          : 'Not Yet',
+                                      style:
+                                          kTextStyle.copyWith(fontSize: 12.0),
                                     ),
                                   ],
                                 ),
@@ -363,10 +371,12 @@ class _CheckInPageState extends State<CheckInPage> {
                                 Column(
                                   children: [
                                     Text(
-                                      '10h:00',
-                                      style: kTextStyle.copyWith(
-                                        fontSize: 12.0,
-                                      ),
+                                      widget.timeDecision?.checkOut != null
+                                          ? DateFormat('hh:mm a').format(
+                                              widget.timeDecision!.checkOut!)
+                                          : 'Not Yet',
+                                      style:
+                                          kTextStyle.copyWith(fontSize: 12.0),
                                     ),
                                   ],
                                 ),
@@ -374,10 +384,10 @@ class _CheckInPageState extends State<CheckInPage> {
                                 Column(
                                   children: [
                                     Text(
-                                      '03:00',
-                                      style: kTextStyle.copyWith(
-                                        fontSize: 12.0,
-                                      ),
+                                      widget.timeDecision?.totalWorkTime ??
+                                          'Not Yet',
+                                      style:
+                                          kTextStyle.copyWith(fontSize: 12.0),
                                     ),
                                   ],
                                 ),

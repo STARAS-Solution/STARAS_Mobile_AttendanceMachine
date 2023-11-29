@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
@@ -45,7 +44,11 @@ class _DeviceInformationState extends State<DeviceInformation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Flutter Device Info"),
+        title: Text(
+          "Device Info",
+          style: kTextStyle.copyWith(
+              fontWeight: FontWeight.bold, fontSize: 20, color: kDarkWhite),
+        ),
         centerTitle: true,
         backgroundColor: kMainColor,
       ),
@@ -77,9 +80,9 @@ class _DeviceInformationState extends State<DeviceInformation> {
           AndroidDeviceInfo info = snapshot.data!;
           return Column(
             children: [
-              Text('Identifier IMEI: $_identifier',
-                  style: kTextStyle.copyWith(fontSize: 16)),
-              item('Android', info.id),
+              // Text('Identifier IMEI: $_identifier',
+              //     style: kTextStyle.copyWith(fontSize: 16)),
+              item('AndroidId', info.id),
               item('Android Model', info.model),
               item('Android Brand', info.brand),
               item('Android Device', info.device),
@@ -129,13 +132,13 @@ class _DeviceInformationState extends State<DeviceInformation> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
+            SelectableText(
               name,
               style: kTextStyle.copyWith(
                   fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 5),
-            Text(
+            SelectableText(
               value,
               style: kTextStyle.copyWith(fontSize: 16),
             ),

@@ -6,6 +6,8 @@ class LocationController extends GetxController {
   Position? currentPosition;
   var isLoading = false.obs;
   String? currentLocation;
+  double? currentLatitude;
+  double? currentLongitude;
 
   Future<Position> getPosition() async {
     LocationPermission? permission;
@@ -40,11 +42,10 @@ class LocationController extends GetxController {
       isLoading(true);
       update();
       currentPosition = await getPosition();
+      currentLatitude = currentPosition?.latitude;
+      currentLongitude = currentPosition?.longitude;
       getAddressFromLatLng(
           currentPosition!.longitude, currentPosition!.latitude);
-
-      // Save the location to the model
-
       isLoading(false);
       update();
     } catch (e) {

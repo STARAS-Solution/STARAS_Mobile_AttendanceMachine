@@ -82,8 +82,9 @@ class _CameraViewState extends State<CameraView> {
       );
 
       Navigator.pop(context);
+
       if (response.statusCode == 201) {
-        print('Data response : ${response.body}');
+        print('Data Check In Response : ${response.body}');
 
         showToast(
           context: context,
@@ -236,7 +237,7 @@ class _CameraViewState extends State<CameraView> {
             showCameraLensControl: false,
             showControls: false,
             showFlashControl: false,
-            imageResolution: ImageResolution.veryHigh,
+            imageResolution: ImageResolution.high,
             indicatorShape: IndicatorShape.square,
             onCapture: (File? image) {
               setState(() => _capturedImage = image);

@@ -65,7 +65,7 @@ void showToast(
   return fToast.showToast(
       child: ToastWidget(msg: msg, color: color, icon: icon),
       gravity: ToastGravity.BOTTOM,
-      toastDuration: Duration(seconds: timeHint ?? 4),
+      toastDuration: Duration(seconds: timeHint ?? 2),
       positionedToastBuilder: (context, child) {
         return Positioned(
           child: child,

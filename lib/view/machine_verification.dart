@@ -19,7 +19,10 @@ import 'package:staras_checkin/controllers/location_controller.dart';
 import 'package:staras_checkin/controllers/network_controller.dart';
 import 'package:staras_checkin/models/store.info.response.model.dart';
 import 'package:staras_checkin/view/device_infor.dart';
+import 'package:staras_checkin/view/instructions.check.in.dart';
+import 'package:staras_checkin/view/store.information.screen.dart';
 import 'package:staras_checkin/view/store_infor_response.dart';
+import 'package:staras_checkin/view/support.problem.screen.dart';
 
 class VerifyMachinePage extends StatefulWidget {
   const VerifyMachinePage({Key? key}) : super(key: key);
@@ -77,8 +80,10 @@ class _VerifyMachinePageState extends State<VerifyMachinePage> {
     // Request body
     final Map<String, dynamic> requestBody = {
       'machineCode': deviceId,
-      'latitude': _locationController.currentPosition?.latitude,
-      'longitude': _locationController.currentPosition?.longitude,
+      'latitude':
+          _locationController.currentPosition?.latitude.toStringAsFixed(6),
+      'longitude':
+          _locationController.currentPosition?.longitude.toStringAsFixed(6),
       'bssid': _networkController.wifiBSSID,
     };
 
@@ -119,11 +124,13 @@ class _VerifyMachinePageState extends State<VerifyMachinePage> {
         );
 
         print('Machine verification successful');
-      } else if (response.statusCode >= 400 || response.statusCode <= 500) {
+      } else if (response.statusCode >= 400 && response.statusCode <= 500) {
         print('Error: ${response.statusCode} - ${response.body}');
 
+        final Map<String, dynamic> errorData = json.decode(response.body);
         final Map<String, dynamic> errorResponse = json.decode(response.body);
-        final String errorMessage = errorResponse['message'] ?? 'Unknown error';
+        final String errorMessage =
+            errorResponse['message'] ?? 'Can not verify machine';
 
         showToast(
           context: context,
@@ -198,8 +205,9 @@ class _VerifyMachinePageState extends State<VerifyMachinePage> {
                                 fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            'Hoa Lac Hi-tech Park',
-                            style: kTextStyle.copyWith(color: kGreyTextColor),
+                            'Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ',
+                            style: kTextStyle.copyWith(
+                                color: kGreyTextColor, fontSize: 13),
                           ),
                         ],
                       ).onTap(() {
@@ -242,7 +250,52 @@ class _VerifyMachinePageState extends State<VerifyMachinePage> {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  'days',
+                                  'emp',
+                                  style:
+                                      kTextStyle.copyWith(color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 2.0,
+                          ),
+                          Text(
+                            'Employee',
+                            style: kTextStyle.copyWith(color: Colors.white),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.only(
+                                left: 15.0,
+                                right: 15.0,
+                                top: 10.0,
+                                bottom: 10.0),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(80.0),
+                              border: Border.all(color: Colors.white),
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Colors.white.withOpacity(0.6),
+                                  Colors.white.withOpacity(0.0),
+                                ],
+                              ),
+                            ),
+                            child: Column(
+                              children: [
+                                Text(
+                                  '3',
+                                  style: kTextStyle.copyWith(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  'emp',
                                   style:
                                       kTextStyle.copyWith(color: Colors.white),
                                 ),
@@ -281,58 +334,13 @@ class _VerifyMachinePageState extends State<VerifyMachinePage> {
                             child: Column(
                               children: [
                                 Text(
-                                  '3',
-                                  style: kTextStyle.copyWith(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  'days',
-                                  style:
-                                      kTextStyle.copyWith(color: Colors.white),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 2.0,
-                          ),
-                          Text(
-                            'Late',
-                            style: kTextStyle.copyWith(color: Colors.white),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.only(
-                                left: 15.0,
-                                right: 15.0,
-                                top: 10.0,
-                                bottom: 10.0),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(80.0),
-                              border: Border.all(color: Colors.white),
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [
-                                  Colors.white.withOpacity(0.6),
-                                  Colors.white.withOpacity(0.0),
-                                ],
-                              ),
-                            ),
-                            child: Column(
-                              children: [
-                                Text(
                                   '5',
                                   style: kTextStyle.copyWith(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  'days',
+                                  'emp',
                                   style:
                                       kTextStyle.copyWith(color: Colors.white),
                                 ),
@@ -365,6 +373,18 @@ class _VerifyMachinePageState extends State<VerifyMachinePage> {
               ),
             ),
             ListTile(
+              onTap: () => StoreInformationScreen().launch(context),
+              title: Text(
+                'Config Information',
+                style: kTextStyle.copyWith(color: kTitleColor),
+              ),
+              leading: const Icon(
+                Icons.store_mall_directory_outlined,
+                color: kMainColor,
+              ),
+            ),
+            ListTile(
+              onTap: () => InstructionsCheckInPage().launch(context),
               title: Text(
                 'Instructions Check-In',
                 style: kTextStyle.copyWith(color: kTitleColor),
@@ -374,19 +394,20 @@ class _VerifyMachinePageState extends State<VerifyMachinePage> {
                 color: kMainColor,
               ),
             ),
+            // ListTile(
+            //   title: Text(
+            //     'Notification',
+            //     style: kTextStyle.copyWith(color: kTitleColor),
+            //   ),
+            //   leading: const Icon(
+            //     FeatherIcons.bell,
+            //     color: kMainColor,
+            //   ),
+            // ),
             ListTile(
+              onTap: () => SupportProblemScreen().launch(context),
               title: Text(
-                'Notification',
-                style: kTextStyle.copyWith(color: kTitleColor),
-              ),
-              leading: const Icon(
-                FeatherIcons.bell,
-                color: kMainColor,
-              ),
-            ),
-            ListTile(
-              title: Text(
-                'Terms & Conditions',
+                'Support Problem',
                 style: kTextStyle.copyWith(color: kTitleColor),
               ),
               leading: const Icon(
@@ -394,16 +415,16 @@ class _VerifyMachinePageState extends State<VerifyMachinePage> {
                 color: kMainColor,
               ),
             ),
-            ListTile(
-              title: Text(
-                'Privacy Policy',
-                style: kTextStyle.copyWith(color: kTitleColor),
-              ),
-              leading: const Icon(
-                FeatherIcons.alertTriangle,
-                color: kMainColor,
-              ),
-            ),
+            // ListTile(
+            //   title: Text(
+            //     'Privacy Policy',
+            //     style: kTextStyle.copyWith(color: kTitleColor),
+            //   ),
+            //   leading: const Icon(
+            //     FeatherIcons.alertTriangle,
+            //     color: kMainColor,
+            //   ),
+            // ),
           ],
         ),
       ),
