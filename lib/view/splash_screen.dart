@@ -27,14 +27,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
     defaultBlurRadius = 10.0;
     defaultSpreadRadius = 0.5;
-    bool isValid = await PurchaseModel().isActiveBuyer();
-    if (isValid) {
-      finish(context);
 
-      const VerifyMachinePage().launch(context, isNewTask: true);
-    } else {
-      showLicense(context: context);
-    }
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => VerifyMachinePage()),
+    );
   }
 
   @override
@@ -55,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
               height: MediaQuery.of(context).size.height / 3,
             ),
             const Image(
-              image: AssetImage('assets/images/round_logo.png'),
+              image: AssetImage('assets/images/logo.png'),
               width: 170,
               height: 170,
             ),

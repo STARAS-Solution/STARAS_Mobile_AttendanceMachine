@@ -55,7 +55,7 @@ class _StoreInfoResponsePageState extends State<StoreInfoResponsePage> {
             ),
             Container(
               width: context.width(),
-              height: 1000,
+              height: context.height(),
               padding: const EdgeInsets.all(20.0),
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
@@ -66,6 +66,8 @@ class _StoreInfoResponsePageState extends State<StoreInfoResponsePage> {
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const SizedBox(
                       height: 20.0,
@@ -82,82 +84,85 @@ class _StoreInfoResponsePageState extends State<StoreInfoResponsePage> {
                           ),
                         );
                       },
-                      child: Card(
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ListTile(
-                                leading: const Icon(
-                                  Icons.store_rounded,
-                                  color: kMainColor,
-                                ),
-                                title: Text(
-                                  storeInfo?.storeName ?? "",
-                                  style: kTextStyle.copyWith(
-                                    fontSize: 17.0,
-                                    fontWeight: FontWeight.bold,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 120),
+                        child: Card(
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ListTile(
+                                  leading: const Icon(
+                                    Icons.store_rounded,
+                                    color: kMainColor,
+                                  ),
+                                  title: Text(
+                                    storeInfo?.storeName ?? "",
+                                    style: kTextStyle.copyWith(
+                                      fontSize: 17.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  subtitle: Text(
+                                    storeInfo?.active == true
+                                        ? 'Active'
+                                        : 'Not Active',
+                                    style: kTextStyle.copyWith(
+                                      color: storeInfo?.active == true
+                                          ? Colors.green
+                                          : Colors.red,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 10,
+                                    ),
                                   ),
                                 ),
-                                subtitle: Text(
-                                  storeInfo?.active == true
-                                      ? 'Active'
-                                      : 'Not Active',
-                                  style: kTextStyle.copyWith(
-                                    color: storeInfo?.active == true
-                                        ? Colors.green
-                                        : Colors.red,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 10,
-                                  ),
+                                Divider(
+                                  color: kBorderColorTextField.withOpacity(0.2),
+                                  thickness: 1,
                                 ),
-                              ),
-                              Divider(
-                                color: kBorderColorTextField.withOpacity(0.2),
-                                thickness: 1,
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                'Open time:     ${storeInfo?.openTime ?? ""}',
-                                style:
-                                    kTextStyle.copyWith(color: kGreyTextColor),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                'Close time:     ${storeInfo?.closeTime ?? ""}',
-                                style:
-                                    kTextStyle.copyWith(color: kGreyTextColor),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                'Create date: ${DateFormat('dd-MM-yyyy').format(storeInfo?.createDate ?? DateTime.now())}',
-                                style:
-                                    kTextStyle.copyWith(color: kGreyTextColor),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                'Address:         ${storeInfo?.address ?? ""}',
-                                maxLines: 5,
-                                style:
-                                    kTextStyle.copyWith(color: kGreyTextColor),
-                              ),
-                              const SizedBox(
-                                height: 2.0,
-                              ),
-                            ],
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  'Open time:     ${storeInfo?.openTime ?? ""}',
+                                  style: kTextStyle.copyWith(
+                                      color: kGreyTextColor),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  'Close time:     ${storeInfo?.closeTime ?? ""}',
+                                  style: kTextStyle.copyWith(
+                                      color: kGreyTextColor),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  'Create date: ${DateFormat('dd-MM-yyyy').format(storeInfo?.createDate ?? DateTime.now())}',
+                                  style: kTextStyle.copyWith(
+                                      color: kGreyTextColor),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  'Address:         ${storeInfo?.address ?? ""}',
+                                  maxLines: 5,
+                                  style: kTextStyle.copyWith(
+                                      color: kGreyTextColor),
+                                ),
+                                const SizedBox(
+                                  height: 2.0,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),

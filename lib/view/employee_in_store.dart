@@ -113,16 +113,28 @@ class _EmployeeInStorePageState extends State<EmployeeInStorePage> {
                       ),
                     ),
                     const SizedBox(height: 40.0),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: (filteredEmployees!.length / 3).ceil(),
-                      itemBuilder: (context, rowIndex) {
-                        final startIndex = rowIndex * 3;
-                        return _buildEmployeeRow(
-                            filteredEmployees!, startIndex);
-                      },
-                    ),
+                    const SizedBox(height: 40.0),
+                    employees != null && employees.isNotEmpty
+                        ? ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: (filteredEmployees!.length / 3).ceil(),
+                            itemBuilder: (context, rowIndex) {
+                              final startIndex = rowIndex * 3;
+                              return _buildEmployeeRow(
+                                  filteredEmployees!, startIndex);
+                            },
+                          )
+                        : Container(
+                            alignment: Alignment.center,
+                            child: Text(
+                              'No Employees In Store',
+                              style: kTextStyle.copyWith(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
                     const SizedBox(
                       height: 20,
                     ),

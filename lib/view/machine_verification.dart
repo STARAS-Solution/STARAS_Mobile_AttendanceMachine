@@ -75,7 +75,7 @@ class _VerifyMachinePageState extends State<VerifyMachinePage> {
 
   Future<void> verifyMachine() async {
     var apiUrl =
-        'https://staras-api.smjle.vn/api/attendancemachine/machine-get-store-infor';
+        'https://staras-api.smjle.xyz/api/attendancemachine/machine-get-store-infor';
 
     // Request body
     final Map<String, dynamic> requestBody = {
@@ -176,7 +176,7 @@ class _VerifyMachinePageState extends State<VerifyMachinePage> {
               child: Column(
                 children: [
                   Container(
-                    height: context.height() / 4,
+                    height: context.height() / 3.5,
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(30.0),
@@ -189,30 +189,21 @@ class _VerifyMachinePageState extends State<VerifyMachinePage> {
                           const SizedBox(
                             height: 10.0,
                           ),
-                          const CircleAvatar(
-                            radius: 60.0,
-                            backgroundColor: kMainColor,
-                            backgroundImage: AssetImage(
-                              'assets/images/passio.png',
-                            ),
+                          const Image(
+                            image: AssetImage('assets/images/logo.png'),
+                            width: 120,
+                            height: 120,
                           ),
                           const SizedBox(
-                            height: 10.0,
+                            height: 8.0,
                           ),
                           Text(
-                            'Store',
+                            ' STARAS',
                             style: kTextStyle.copyWith(
                                 fontWeight: FontWeight.bold),
                           ),
-                          Text(
-                            'Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ',
-                            style: kTextStyle.copyWith(
-                                color: kGreyTextColor, fontSize: 13),
-                          ),
                         ],
-                      ).onTap(() {
-                        // const ProfileScreen().launch(context);
-                      }),
+                      ).onTap(() {}),
                     ),
                   ),
                   const SizedBox(
@@ -223,137 +214,137 @@ class _VerifyMachinePageState extends State<VerifyMachinePage> {
                     children: [
                       Column(
                         children: [
-                          Container(
-                            padding: const EdgeInsets.only(
-                                left: 15.0,
-                                right: 15.0,
-                                top: 10.0,
-                                bottom: 10.0),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(80.0),
-                              border: Border.all(color: Colors.white),
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [
-                                  Colors.white.withOpacity(0.6),
-                                  Colors.white.withOpacity(0.0),
-                                ],
-                              ),
-                            ),
-                            child: Column(
-                              children: [
-                                Text(
-                                  '22',
-                                  style: kTextStyle.copyWith(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  'emp',
-                                  style:
-                                      kTextStyle.copyWith(color: Colors.white),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 2.0,
-                          ),
-                          Text(
-                            'Employee',
-                            style: kTextStyle.copyWith(color: Colors.white),
-                          ),
+                          // Container(
+                          //   padding: const EdgeInsets.only(
+                          //       left: 15.0,
+                          //       right: 15.0,
+                          //       top: 10.0,
+                          //       bottom: 10.0),
+                          //   decoration: BoxDecoration(
+                          //     borderRadius: BorderRadius.circular(80.0),
+                          //     border: Border.all(color: Colors.white),
+                          //     gradient: LinearGradient(
+                          //       begin: Alignment.topCenter,
+                          //       end: Alignment.bottomCenter,
+                          //       colors: [
+                          //         Colors.white.withOpacity(0.6),
+                          //         Colors.white.withOpacity(0.0),
+                          //       ],
+                          //     ),
+                          //   ),
+                          //   child: Column(
+                          //     children: [
+                          //       Text(
+                          //         '',
+                          //         style: kTextStyle.copyWith(
+                          //             color: Colors.white,
+                          //             fontWeight: FontWeight.bold),
+                          //       ),
+                          //       Text(
+                          //         '',
+                          //         style:
+                          //             kTextStyle.copyWith(color: Colors.white),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
+                          // const SizedBox(
+                          //   height: 2.0,
+                          // ),
+                          // Text(
+                          //   '',
+                          //   style: kTextStyle.copyWith(color: Colors.white),
+                          // ),
                         ],
                       ),
                       Column(
                         children: [
-                          Container(
-                            padding: const EdgeInsets.only(
-                                left: 15.0,
-                                right: 15.0,
-                                top: 10.0,
-                                bottom: 10.0),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(80.0),
-                              border: Border.all(color: Colors.white),
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [
-                                  Colors.white.withOpacity(0.6),
-                                  Colors.white.withOpacity(0.0),
-                                ],
-                              ),
-                            ),
-                            child: Column(
-                              children: [
-                                Text(
-                                  '3',
-                                  style: kTextStyle.copyWith(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  'emp',
-                                  style:
-                                      kTextStyle.copyWith(color: Colors.white),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 2.0,
-                          ),
-                          Text(
-                            'Present',
-                            style: kTextStyle.copyWith(color: Colors.white),
-                          ),
+                          // Container(
+                          //   padding: const EdgeInsets.only(
+                          //       left: 15.0,
+                          //       right: 15.0,
+                          //       top: 10.0,
+                          //       bottom: 10.0),
+                          //   decoration: BoxDecoration(
+                          //     borderRadius: BorderRadius.circular(80.0),
+                          //     border: Border.all(color: Colors.white),
+                          //     gradient: LinearGradient(
+                          //       begin: Alignment.topCenter,
+                          //       end: Alignment.bottomCenter,
+                          //       colors: [
+                          //         Colors.white.withOpacity(0.6),
+                          //         Colors.white.withOpacity(0.0),
+                          //       ],
+                          //     ),
+                          //   ),
+                          //   child: Column(
+                          //     children: [
+                          //       Text(
+                          //         '',
+                          //         style: kTextStyle.copyWith(
+                          //             color: Colors.white,
+                          //             fontWeight: FontWeight.bold),
+                          //       ),
+                          //       Text(
+                          //         '',
+                          //         style:
+                          //             kTextStyle.copyWith(color: Colors.white),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
+                          // const SizedBox(
+                          //   height: 2.0,
+                          // ),
+                          // Text(
+                          //   '',
+                          //   style: kTextStyle.copyWith(color: Colors.white),
+                          // ),
                         ],
                       ),
                       Column(
                         children: [
-                          Container(
-                            padding: const EdgeInsets.only(
-                                left: 15.0,
-                                right: 15.0,
-                                top: 10.0,
-                                bottom: 10.0),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(80.0),
-                              border: Border.all(color: Colors.white),
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [
-                                  Colors.white.withOpacity(0.6),
-                                  Colors.white.withOpacity(0.0),
-                                ],
-                              ),
-                            ),
-                            child: Column(
-                              children: [
-                                Text(
-                                  '5',
-                                  style: kTextStyle.copyWith(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  'emp',
-                                  style:
-                                      kTextStyle.copyWith(color: Colors.white),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 2.0,
-                          ),
-                          Text(
-                            'Absent',
-                            style: kTextStyle.copyWith(color: Colors.white),
-                          ),
+                          // Container(
+                          //   padding: const EdgeInsets.only(
+                          //       left: 15.0,
+                          //       right: 15.0,
+                          //       top: 10.0,
+                          //       bottom: 10.0),
+                          //   decoration: BoxDecoration(
+                          //     borderRadius: BorderRadius.circular(80.0),
+                          //     border: Border.all(color: Colors.white),
+                          //     gradient: LinearGradient(
+                          //       begin: Alignment.topCenter,
+                          //       end: Alignment.bottomCenter,
+                          //       colors: [
+                          //         Colors.white.withOpacity(0.6),
+                          //         Colors.white.withOpacity(0.0),
+                          //       ],
+                          //     ),
+                          //   ),
+                          //   child: Column(
+                          //     children: [
+                          //       Text(
+                          //         '',
+                          //         style: kTextStyle.copyWith(
+                          //             color: Colors.white,
+                          //             fontWeight: FontWeight.bold),
+                          //       ),
+                          //       Text(
+                          //         '',
+                          //         style:
+                          //             kTextStyle.copyWith(color: Colors.white),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
+                          // const SizedBox(
+                          //   height: 2.0,
+                          // ),
+                          // Text(
+                          //   '',
+                          //   style: kTextStyle.copyWith(color: Colors.white),
+                          // ),
                         ],
                       ),
                     ],
